@@ -22,3 +22,12 @@ def vrr(graph):
     vrr_graph = sorted(vrr, key = lambda i: i['vrr'], reverse=True)
     return vrr_graph
     
+def format_vrr(graph):
+    nodes = graph["nodes"]
+    edges = graph["edges"]
+    vrr = []
+    nc_graph = nc(graph)
+    for i in range(len(nodes)):
+        vrr_i = nc_graph[i] * nodes[i] * sum(edges[i])
+        vrr.append({"node": i,"cpu" : nodes[i], "bw": edges[i], "vrr" : vrr_i})
+    return vrr

@@ -3,7 +3,7 @@ import sort_revenue as sr
 import vrr as vrr
 import shortest_distance as sd
 import mapping_function as mp
-
+import shortest_link as sp
 # Upper-level function
 
 
@@ -50,15 +50,26 @@ def main():
     revenues = sr.sort_revenue([virtual_network])
 
     # 3. Calculating the VRR (Virtual Residual Resources) for each VNR
-    vrr_graph = vrr.vrr(virtual_network)
+    sorted_vrr_graph = vrr.vrr(virtual_network)
+    #Storing the unsorted_vrr_graph in order to use in edge-mapping
+    unsorted_vrr_graph = vrr.format_vrr(virtual_network)
     # print(vrr_graph)
 
     #Assuming CDN is at the 0th node (substrate network)
     substrate_net = sd.add_hops(substrate_network, 0, unweighted_substrate_edges)
-    node_map = mp.mapping_nodes(vrr_graph, substrate_net)
+    node_map = mp.mapping_nodes(sorted_vrr_graph, substrate_net)
     print(node_map)
+    
     #Edge Mapping
+    #CDN node (substrate network) = 0
+    #1. Remove all links from substrate links
+    old_substrate_net = substrate_net
+    for node in substrate_net:
+        node['bw'][0] = 0
 
+
+    #2. For each virtual link, search k-shortest path
+    sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
 
 
 
