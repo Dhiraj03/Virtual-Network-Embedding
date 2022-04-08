@@ -6,7 +6,7 @@ def mapping_nodes(vrr, substrate):
     
     for substrate_node in substrate:
         
-        print(pow(0.1, substrate_node['hops']))
+        #print(pow(0.1, substrate_node['hops']))
         srr_i = pow(0.1, substrate_node['hops']) * substrate_node['cpu'] * sum(substrate_node['bw'])
         substrate_node["srr"] = srr_i
         if(substrate_node['hops'] == 0):
@@ -21,4 +21,3 @@ def mapping_nodes(vrr, substrate):
     return node_mapping
 
     
-

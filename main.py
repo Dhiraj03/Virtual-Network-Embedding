@@ -58,18 +58,32 @@ def main():
     #Assuming CDN is at the 0th node (substrate network)
     substrate_net = sd.add_hops(substrate_network, 0, unweighted_substrate_edges)
     node_map = mp.mapping_nodes(sorted_vrr_graph, substrate_net)
-    print(node_map)
+
+    print('For the given Virtual network request the Node mapping i as follow:\n')
+    for i in node_map:
+        print("Virtual node",i,"is mapped to Substrate Node",node_map[i])
+    #print(node_map)
     
     #Edge Mapping
     #CDN node (substrate network) = 0
     #1. Remove all links from substrate links
     old_substrate_net = substrate_net
-    for node in substrate_net:
-        node['bw'][0] = 0
+    #for node in substrate_net:
+    #    node['bw'][0] = 0
+    #temp = []
+    #for substrate_node in substrate_net:
+    #    temp.append(substrate_node['bw'])
+    #for j in temp:
+    #    for i in range(len(j)):
+    #        if j[i] > 0:
+    #            j[i] = 1
+
+    #print(temp)
+
 
 
     #2. For each virtual link, search k-shortest path
-    sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
+    #sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
 
 
 

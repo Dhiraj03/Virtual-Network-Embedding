@@ -22,10 +22,6 @@ class Graph():
                       for row in range(vertices)]
 
 
-    def printSolution(self, dist):
-        print("Vertex \tDistance from Source")
-        for node in range(self.V):
-            print(node, "\t", dist[node])
 
 # A utility function to find the vertex with
 # minimum distance value, from the set of vertices
