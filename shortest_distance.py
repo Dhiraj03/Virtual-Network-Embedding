@@ -5,7 +5,7 @@ def add_hops(graph, cdn, adj_graph):
     g = Graph(6)
     g.graph = adj_graph
     hops = g.dijkstra(cdn)
-    
+    graph = graph
     for i in range(len(hops)):
         graph[i]["hops"] = hops[i]
     return graph

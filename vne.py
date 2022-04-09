@@ -14,4 +14,5 @@ def create_graph():
     new_graph = []
     for i in range(len(graph["nodes"])):
         new_graph.append({"node": i, "cpu": graph["nodes"][i], "bw": graph["edges"][i]})
+    #print(new_graph)
     return new_graph

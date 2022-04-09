@@ -4,6 +4,7 @@ import vrr as vrr
 import shortest_distance as sd
 import mapping_function as mp
 import shortest_link as sp
+import weight_check as wc
 # Upper-level function
 
 
@@ -14,7 +15,7 @@ def main():
 
     # Substrate network = physical network
     substrate_network = vne.create_graph()
-    
+    sub_net1 = vne.create_graph()
     # Substrate network
     substrate_nodes = [10, 10, 10, 10, 10, 10]
     substrate_edges = [
@@ -73,11 +74,16 @@ def main():
 
     #2. For each virtual link, search k-shortest path
     links = sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
-    count = 0
-    for i in links:
+    flag = wc.w_check(links, sub_net1, unsorted_vrr_graph)
+    #print(links)
+    if flag:
 
-        print("Virtual link ",count,"uses the path between nodes",i)
-        count+=1
+        count = 0
+        for i in links:
+
+            print("Virtual link",i['link_no'],"uses the path between nodes",i['path'])
+            count+=1
+    
 
 
 
