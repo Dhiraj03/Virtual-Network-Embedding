@@ -29,13 +29,14 @@ def shortest_link(updated_substrate_net, substrate_net, vrr, node_mapping):
                 'source':prev_node, 'destination':i, 'link_no': count})
         else:
             first = node_mapping[i]-1
+            v_first = i
         prev_node = i
         path = g.dijkstra(temp,node_mapping[i]-1)
         temp_path = path
         count += 1
     virtual_links.append({
         'path':[x+1 for x in temp_path[first]],
-        'source':prev_node,'destination':first,'link_no': count})
+        'source':prev_node,'destination':v_first,'link_no': count})
     return virtual_links
     
                 
