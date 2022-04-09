@@ -83,8 +83,12 @@ def main():
 
 
     #2. For each virtual link, search k-shortest path
-    #sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
+    links = sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    
+    count = 0
+    for i in links:
 
+        print("Virtual link ",count,"uses the path between nodes",i)
+        count+=1
 
 
 

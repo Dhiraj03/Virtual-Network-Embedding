@@ -18,21 +18,20 @@ def shortest_link(updated_substrate_net, substrate_net, vrr, node_mapping):
             if j[i] > 0:
                 j[i] = 1
     g= Graph()
+    virtual_links = []
+    temp_path = []
     #print(len(node_mapping))
     for i in node_mapping:
-        g.dijkstra(temp,node_mapping[i]-1)
+        if len(temp_path)!=0:
+            virtual_links.append([x+1 for x in temp_path[(node_mapping[i]-1)]])
+        else:
+            first = node_mapping[i]-1
+        path = g.dijkstra(temp,node_mapping[i]-1)
+        temp_path = path
+    virtual_links.append([x+1 for x in temp_path[first]])
+    return virtual_links
     
-    
-
-            #for node in updated_substrate_net:
-            #    node['edges'] = []
-            #    for i in range(len(node['bw'])):
-            #        if(node['bw'][i] > 0):
-            #            node['edges'].append(i)
-            #    
-#
-    #list(shortest_dist(updated_substrate_net, node['node'], 0))
-            
+                
 class Graph:
  
     def minDistance(self,dist,queue):
@@ -46,15 +45,16 @@ class Graph:
         return min_index
  
  
-    def printPath(self, parent, j):
+    def printPath(self, parent):
         path = []
-        for j in range(1,len(parent)):
+        for j in range(0,len(parent)):
             p1 = []
             while(parent[j] != -1):
                 p1.append(j)
                 j = parent[j]
+            p1.append(j)
             path.append(p1)
-        print(path)
+        return path
 
         
         
@@ -62,9 +62,8 @@ class Graph:
  
     def printSolution(self, dist, parent):
         src = 0
-        for i in range(1, len(dist)):
-            print("\n")
-            self.printPath(parent,i)
+        #for i in range(1, len(dist)):
+        return self.printPath(parent)
  
     def dijkstra(self, graph, src):
  
@@ -106,7 +105,7 @@ class Graph:
                         parent[i] = u
  
  
-        self.printSolution(dist,parent)
+        return self.printSolution(dist,parent)
 
 
         
