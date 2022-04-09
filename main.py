@@ -1,4 +1,4 @@
-import cmnr as cmnr
+import vne as vne
 import sort_revenue as sr
 import vrr as vrr
 import shortest_distance as sd
@@ -13,7 +13,8 @@ def main():
     # 1. Create graphs for both substrate and virtual networks (VNR)
 
     # Substrate network = physical network
-    substrate_network = cmnr.create_graph()
+    substrate_network = vne.create_graph()
+    
     # Substrate network
     substrate_nodes = [10, 10, 10, 10, 10, 10]
     substrate_edges = [
@@ -59,28 +60,16 @@ def main():
     substrate_net = sd.add_hops(substrate_network, 0, unweighted_substrate_edges)
     node_map = mp.mapping_nodes(sorted_vrr_graph, substrate_net)
 
+    #Printing the node-mapping
     print('For the given Virtual network request the Node mapping i as follow:\n')
     for i in node_map:
         print("Virtual node",i,"is mapped to Substrate Node",node_map[i])
-    #print(node_map)
+   
     
     #Edge Mapping
     #CDN node (substrate network) = 0
     #1. Remove all links from substrate links
     old_substrate_net = substrate_net
-    #for node in substrate_net:
-    #    node['bw'][0] = 0
-    #temp = []
-    #for substrate_node in substrate_net:
-    #    temp.append(substrate_node['bw'])
-    #for j in temp:
-    #    for i in range(len(j)):
-    #        if j[i] > 0:
-    #            j[i] = 1
-
-    #print(temp)
-
-
 
     #2. For each virtual link, search k-shortest path
     links = sp.shortest_link(substrate_net, old_substrate_net, unsorted_vrr_graph, node_map)    

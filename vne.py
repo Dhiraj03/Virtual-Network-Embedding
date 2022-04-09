@@ -1,3 +1,4 @@
+#Creates a graph to simulate the physical (substrate) network
 def create_graph():
     nodes = [10, 10, 10, 10, 10, 10]
     edges = [

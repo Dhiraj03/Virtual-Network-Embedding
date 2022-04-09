@@ -1,5 +1,6 @@
 import numpy as np
 
+#Sorts all the VNR (Virtual Network Requests) requests in descending order of revenue
 def sort_revenue(graphs):
     rev = []
     for i in range(len(graphs)):
